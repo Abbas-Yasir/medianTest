@@ -1,0 +1,68 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdint.h>
+#include <math.h>
+
+#define itemType int
+
+struct med_Datatype {
+    itemType*  array;
+    double elementNo;
+    double med;
+};
+
+typedef struct med_Datatype med_Struct;
+
+// int median(int* arr1,int m, int* arr2, int n);
+med_Struct median(itemType* arr1,int m, itemType* arr2, int n)
+{
+    med_Struct med;
+    double i    = (double)(m+1)/2-1;
+    double j    = (double)(n+1)/2-1;
+    double x    = (double)(m+n+1)/2-1;
+    double y    = 0;
+
+    // (floor(m/2+1)+floor(m/2+.5))/2
+
+    double med1=(double)(arr1[(int)floor(i)]+arr1[(int)ceil(i)])/2;
+    double med2=(double)(arr2[(int)floor(j)]+arr2[(int)ceil(j)])/2;
+    printf("med1= %0.2f its index i= %0.2f \r\n",med1,i);
+    printf("med2= %0.2f its index j= %0.2f\r\n",med2,j);
+    printf("merged med index= %0.2f \r\n",x);
+
+    if (med1==med2) { 
+        med.array=arr1; med.elementNo=i; 
+        med.med=(double)(med.array[(int)floor(med.elementNo)]+med.array[(int)ceil(med.elementNo)])/2;
+        printf("med1=med2= %0.2f \r\n*********\r\n",med.med);
+        return med; 
+    }
+    else if (med1<med2)
+    {
+        // med=med1;
+        y=i;
+    }
+    return med;
+}
+
+int main()
+{
+    itemType num1[] = {1,2,3,5,10};
+    itemType num2[] = {1,2,3,8,11};
+    itemType m=sizeof(num1)/sizeof(num1[0]);
+    itemType n=sizeof(num2)/sizeof(num2[0]);
+    
+    median(num1,m,num2,n);
+
+
+    // printf("%u \r\n",m);
+    return 0;
+}
+
+
