@@ -26,8 +26,10 @@ med_Struct median(itemType* arr1,int m, itemType* arr2, int n)
     med_Struct med;
     double i    = (double)(m+1)/2-1;
     double j    = (double)(n+1)/2-1;
-    double x    = (double)(m+n+1)/2-1;
+    double merged_Med_i    = (double)(m+n+1)/2-1;
+    double R=0;
     double pos= 0;
+    
     int A;
     int B;
     int C;
@@ -39,7 +41,7 @@ med_Struct median(itemType* arr1,int m, itemType* arr2, int n)
     double med2=(double)(arr2[(int)floor(j)]+arr2[(int)ceil(j)])/2;
     printf("med1= %0.2f its index i= %0.2f \r\n",med1,i);
     printf("med2= %0.2f its index j= %0.2f\r\n",med2,j);
-    printf("merged med index= %0.2f \r\n",x);
+    printf("merged med index= %0.2f \r\n",merged_Med_i);
 
     if (med1==med2) { 
         med.array=arr1; med.elementNo=i; 
@@ -56,28 +58,21 @@ med_Struct median(itemType* arr1,int m, itemType* arr2, int n)
         printf("A=%u,B=%u,C=%u. \r\n",A,B,C);
 
         while(A!=C){
-            if(med1<arr2[B]) {printf("med1<arr2[B] > > >");C=B;B=(int)(C+A)/2;}
-            else {printf("med1>arr2[B] > > >");A=B; B=(int)(C+A)/2;}
+            if(med1<arr2[B]) {printf("med1<arr2[B] > > > ");C=B;B=(int)(C+A)/2;}
+            else {printf("med1>=arr2[B] > > > ");A=B; B=(int)(C+A)/2;}
             // else {printf("med1=arr2[B] > > > Breaking.\r\n");break;}
             if ( B==A ){printf("B=A > > > Breaking.\r\n");break;} // same as C=A+1
             printf("A=%u,B=%u,C=%u. \r\n",A,B,C);
         }
         if(med1<arr2[B]) {printf("med1<arr2[B] > > >");C=B;B=(int)(C+A)/2;}
-        else {printf("med1>arr2[B] > > >");A=B; B=(int)(C+A)/2;}
+        else {printf("med1>=arr2[B] > > >");A=B; B=(int)(C+A)/2;}
         printf("A=%u,B=%u,C=%u. \r\n",A,B,C);
-        printf("B=%u. \r\n",B);
         count=C;
+        printf("count=%u. \r\n",count);
         
-        
-        
-        
-        
-        med.array=arr1; 
-        med.elementNo=i;
         pos=i+count;
-
         pos=pos; 
-        double R=x-pos;
+        R = merged_Med_i - pos;
         printf("Remaining= %0.2f \r\n",R);
         printf("pos= %0.2f \r\n",pos);
     }
@@ -86,15 +81,12 @@ med_Struct median(itemType* arr1,int m, itemType* arr2, int n)
 
 int main()
 {
-    itemType num1[] =   {1,2,3,5,10};
-    itemType num2[] = {1,2,3,4,8,11,12};
+    itemType num1[] =   {1,2,3,6,10};
+    itemType num2[] = {1,5,6,15,18,19,20};
     itemType m=sizeof(num1)/sizeof(num1[0]);
     itemType n=sizeof(num2)/sizeof(num2[0]);
     
     median(num1,m,num2,n);
-
-
-    // printf("%u \r\n",m);
     return 0;
 }
 
