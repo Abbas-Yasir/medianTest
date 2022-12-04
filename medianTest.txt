@@ -74,17 +74,12 @@ med_Struct median(itemType* arr1,int m, itemType* arr2, int n)
         
         med.array=arr1; 
         med.elementNo=i;
-        pos=i;
-        int tempJ=(j/2);
-        double temp_med2=arr1[(int)tempJ];
-        while ((tempJ!=0)&&(temp_med2>med1)) {
-            tempJ=(tempJ/2);
-        }
-        pos=pos+tempJ; 
+        pos=i+count;
+
+        pos=pos; 
         double R=x-pos;
         printf("Remaining= %0.2f \r\n",R);
         printf("pos= %0.2f \r\n",pos);
-        printf("tempJ= %0.2f \r\n",(float)tempJ);
     }
     return med;
 }
@@ -92,7 +87,7 @@ med_Struct median(itemType* arr1,int m, itemType* arr2, int n)
 int main()
 {
     itemType num1[] =   {1,2,3,5,10};
-    itemType num2[] = {3,4,4,4,8,11,12};
+    itemType num2[] = {1,2,3,4,8,11,12};
     itemType m=sizeof(num1)/sizeof(num1[0]);
     itemType n=sizeof(num2)/sizeof(num2[0]);
     
