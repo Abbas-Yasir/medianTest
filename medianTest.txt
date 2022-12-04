@@ -55,10 +55,10 @@ med_Struct median(itemType* arr1,int m, itemType* arr2, int n)
         printf("A=%u,B=%u,C=%u. \r\n",A,B,C);
 
         while(A!=C){
-            if(med1<arr2[B]) {printf("med1<arr2[x] > > >");C=B;B=(int)(C+A)/2;}
-            else if(med1>arr2[B]) {printf("med1>arr2[x] > > >");A=B;B=(int)(C+A)/2;}
-            else {printf("med1=arr2[x] > > >Breaking\r\n");break;}
-            if ( B=A){}
+            if(med1<arr2[B]) {printf("med1<arr2[B] > > >");C=B;B=(int)(C+A)/2;}
+            else if(med1>arr2[B]) {printf("med1>arr2[B] > > >");A=B;B=(int)(C+A)/2;}
+            else {printf("med1=arr2[B] > > > Breaking.\r\n");break;}
+            if ( B=A ){printf("B=A > > > Breaking.\r\n");break;}
             printf("A=%u,B=%u,C=%u. \r\n",A,B,C);
         }
         
