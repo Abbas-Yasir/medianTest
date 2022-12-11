@@ -1,93 +1,60 @@
-/******************************************************************************
-
-                            Online C Compiler.
-                Code, Compile, Run and Debug C program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
+// Online C compiler to run C program online
 #include <stdio.h>
 #include <stdint.h>
 #include <math.h>
 
-#define itemType int
+#define MINVALU -10e6
+#define MAXVALU  10e6
 
-struct med_Datatype {
-    itemType*  array;
-    double elementNo;
-    double med;
-};
+int max(int A, int B){ if (A>B) return A; else return B; }
+int min(int A, int B){ if (A<B) return A; else return B; }
 
-typedef struct med_Datatype med_Struct;
-
-// int median(int* arr1,int m, int* arr2, int n);
-med_Struct median(itemType* arr1,int m, itemType* arr2, int n)
+int median_of_merged(int* A, int m, int* B, int n)
 {
-    med_Struct med;
-    double i    = (double)(m+1)/2-1;
-    double j    = (double)(n+1)/2-1;
-    double merged_Med_i    = (double)(m+n+1)/2-1;
-    double R=0;
-    double pos= 0;
+    // int m=sizeof(A)/sizeof(A[0]);
+    // int n=sizeof(B)/sizeof(B[0]);
+    if (m>n){return median_of_merged(B,n,A,m);}
     
-    int A;
-    int B;
-    int C;
-    int count=0;
-
-    // (floor(m/2+1)+floor(m/2+.5))/2
-
-    double med1=(double)(arr1[(int)floor(i)]+arr1[(int)ceil(i)])/2;
-    double med2=(double)(arr2[(int)floor(j)]+arr2[(int)ceil(j)])/2;
-    printf("med1= %0.2f its index i= %0.2f \r\n",med1,i);
-    printf("med2= %0.2f its index j= %0.2f\r\n",med2,j);
-    printf("merged med index= %0.2f \r\n",merged_Med_i);
-
-    if (med1==med2) { 
-        med.array=arr1; med.elementNo=i; 
-        med.med=(double)(med.array[(int)floor(med.elementNo)]+med.array[(int)ceil(med.elementNo)])/2;
-        printf("med.elementNo= %0.2f \r\n",med.elementNo);
-        printf("med1=med2= %0.2f \r\n*********\r\n",med.med);
-        return med; 
-    }
-    else if (med1<med2)
+    int merged_med_index = (m+n+1)/2; //if the size is even this index is for the first element.
+    int start_A = 0;
+    int end_A   = m;
+    
+    while(start_A <= end_A)
     {
-        A=0;
-        C=(int)j;
-        B=(int)(C+A)/2;
-        printf("A=%u,B=%u,C=%u. \r\n",A,B,C);
-
-        while(A!=C){
-            if(med1<arr2[B]) {printf("med1<arr2[B] > > > ");C=B;B=(int)(C+A)/2;}
-            else {printf("med1>=arr2[B] > > > ");A=B; B=(int)(C+A)/2;}
-            if ( B==A ){printf("B=A > > > Breaking.\r\n");break;} // same as C=A+1
-            printf("A=%u,B=%u,C=%u. \r\n",A,B,C);
+        int mid_A= (start_A+end_A)/2;
+        int left_size_A= mid_A;
+        int left_size_B= merged_med_index-mid_A;
+        
+        int left_A,left_B,right_A,right_B;
+        if (left_size_A>0) { left_A=A[left_size_A-1]; } else {left_A=MINVALU;}
+        if(left_size_B>0){ left_B=B[left_size_B-1]; } else {left_B=MINVALU;}
+        if(left_size_A<m){ right_A=A[left_size_A];   } else {right_A=MAXVALU;}
+        if(left_size_B<n){ right_B=B[left_size_B];   } else {right_B=MAXVALU;}
+        // printf("(%u, %u, %u, %u)",left_A,right_A,left_B,right_B);
+        if (left_A <= right_B && left_B <= right_A) 
+        {
+             if ((m + n) % 2 == 0) 
+             {return (max(left_A, left_B) + min(right_A, right_B)) / 2;}
+             return max(left_A, left_B);
         }
-        if(med1<arr2[B]) {printf("med1<arr2[B] > > >");C=B; B=(int)(C+A)/2;}
-        else {printf("med1>=arr2[B] > > >");A=B; B=(int)(C+A)/2;}
-        
-        printf("A=%u,B=%u,C=%u. \r\n",A,B,C);
-        count=C;
-        printf("count=%u. \r\n",count);
-        
-        pos=i+count;
-        pos=pos; 
-        R = merged_Med_i - pos;
-        printf("Remaining= %0.2f \r\n",R);
-        printf("pos= %0.2f \r\n",pos);
+        else if (left_A > right_B){end_A = mid_A - 1;}
+        else    {start_A = mid_A + 1;}
     }
-    return med;
+    
 }
 
-int main()
-{
-    itemType num1[] =   {1,2,3,6,10};
-    itemType num2[] = {1,5,6,15,18,19,20};
-    itemType m=sizeof(num1)/sizeof(num1[0]);
-    itemType n=sizeof(num2)/sizeof(num2[0]);
+
+int main() {
+    // Write C code here
+    int A[] = {1, 2, 3, 6};
+    int B[] = {4, 7, 8, 10, 22};
+    int m=sizeof(A)/sizeof(A[0]);
+    int n=sizeof(B)/sizeof(B[0]);
     
-    median(num1,m,num2,n);
+    int Y= 7;
+    Y= median_of_merged(A,m,B,n);
+    printf("%u",Y);
+
+
     return 0;
 }
-
-
