@@ -13,10 +13,13 @@ array_2.length == n
 
 
 ## Testing the code online:
-Use the website:
+Use the website: 
+
 https://www.programiz.com/c-programming/online-compiler/
 
 ## References:
-https://www.scaler.com/topics/median-of-two-sorted-arrays/
+https://www.scaler.com/topics/median-of-two-sorted-arrays/ 
+
 The code in the reference site is in C++
-This code is in C
+ 
+ This code is in C
