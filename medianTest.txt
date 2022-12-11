@@ -1,4 +1,6 @@
 // Online C compiler to run C program online
+//run it in":
+//https://www.programiz.com/c-programming/online-compiler/
 #include <stdio.h>
 #include <stdint.h>
 #include <math.h>
