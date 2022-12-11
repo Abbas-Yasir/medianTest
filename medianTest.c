@@ -1,6 +1,4 @@
 // Online C compiler to run C program online
-//run it in":
-//https://www.programiz.com/c-programming/online-compiler/
 #include <stdio.h>
 #include <stdint.h>
 #include <math.h>
@@ -11,10 +9,8 @@
 int max(int A, int B){ if (A>B) return A; else return B; }
 int min(int A, int B){ if (A<B) return A; else return B; }
 
-int median_of_merged(int* A, int m, int* B, int n)
+float median_of_merged(int* A, int m, int* B, int n)
 {
-    // int m=sizeof(A)/sizeof(A[0]);
-    // int n=sizeof(B)/sizeof(B[0]);
     if (m>n){return median_of_merged(B,n,A,m);}
     
     int merged_med_index = (m+n+1)/2; //if the size is even this index is for the first element.
@@ -36,27 +32,21 @@ int median_of_merged(int* A, int m, int* B, int n)
         if (left_A <= right_B && left_B <= right_A) 
         {
              if ((m + n) % 2 == 0) 
-             {return (max(left_A, left_B) + min(right_A, right_B)) / 2;}
+             {return (max(left_A, left_B) + min(right_A, right_B)) / 2.0;}
              return max(left_A, left_B);
         }
         else if (left_A > right_B){end_A = mid_A - 1;}
         else    {start_A = mid_A + 1;}
     }
-    
 }
-
 
 int main() {
     // Write C code here
-    int A[] = {1, 2, 3, 6};
-    int B[] = {4, 7, 8, 10, 22};
+    int A[] = {1, 2, 3, 3};
+    int B[] = {4, 7, 8, 10, 22, 23};
     int m=sizeof(A)/sizeof(A[0]);
     int n=sizeof(B)/sizeof(B[0]);
-    
-    int Y= 7;
-    Y= median_of_merged(A,m,B,n);
-    printf("%u",Y);
-
-
+    float Y= median_of_merged(A,m,B,n);
+    printf("%0.2f",Y);
     return 0;
 }
